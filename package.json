@@ -1,0 +1,38 @@
+{
+  "name": "@seabass/co-fee-calculator",
+  "version": "0.0.1",
+  "description": "Calculates fee rates for Collage",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "cov": "istanbul cover node_modules/mocha/bin/_mocha -dir etc --report lcovonly -- test/ -R spec",
+    "lint": "eslint index.js -c etc/.eslint.json",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebastiansandqvist/co-fee-calculator.git"
+  },
+  "keywords": [
+    "collage"
+  ],
+  "author": "sebastian sandqvist",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sebastiansandqvist/co-fee-calculator/issues"
+  },
+  "homepage": "https://github.com/sebastiansandqvist/co-fee-calculator#readme",
+  "devDependencies": {
+    "@seabass/eslint-config": "^1.1.2",
+    "chai": "^3.3.0",
+    "codeclimate-test-reporter": "^0.1.1",
+    "eslint": "^1.5.1",
+    "istanbul": "^0.3.21",
+    "mocha": "^2.3.3"
+  },
+  "dependencies": {
+    "round-to": "^1.0.0"
+  }
+}
