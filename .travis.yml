@@ -4,7 +4,7 @@ node_js:
 sudo: false
 addons:
   code_climate:
-    repo_token: INSERT_TOKEN_HERE
+    repo_token: 5d23522c61a9a3eef235dcd9c53cf6b1f2d74a5c45e723a0f3feb5f34650785b
 script: "npm run cov"
 after_script:
   - codeclimate-test-reporter < etc/lcov.info
