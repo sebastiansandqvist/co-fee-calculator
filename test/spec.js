@@ -30,6 +30,12 @@ describe('Collage fee', function() {
 		}
 	});
 
+	it('seller earnings for should be positive for items above $5', function() {
+		for (var i = 500; i <= 100000; i+= 100) {
+			expect(calc.sellerEarns(i)).to.be.above(0);
+		}
+	});
+
 	it('stripe fee should be less than seller fee', function() {
 		for (var i = 100; i <= 100000; i += 100) {
 			expect(calc.stripeFee(i)).to.be.below(calc.sellerFee(i));
@@ -46,6 +52,6 @@ describe('Collage fee', function() {
 		for (var i = 0; i <= 100000; i += 100) {
 			expect(calc.collageRevenue(i)).to.be.above(0);
 		}
-	})
+	});
 
 });
