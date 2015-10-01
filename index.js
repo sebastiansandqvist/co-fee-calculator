@@ -55,6 +55,15 @@ module.exports = {
 	},
 
 	/**
+	 * Percent of final sale price that goes to the seller
+	 * @param  {Number} i initialPrice in cents
+	 * @return {Number}   %
+	 */
+	sellerEarnsPercentage(i) {
+		return round((i - this.sellerFee(i)) * 100 / this.finalPrice(i), 0);
+	},
+
+	/**
 	 * What Collage earns from seller fees (is kind to sellers by not basing on finalPrice)
 	 * @param  {Number} initialPrice in cents
 	 * @return {Number}              in cents

@@ -36,6 +36,25 @@ describe('Collage fee', function() {
 		}
 	});
 
+	it('seller percentage of earnings should be above 75% for items above $10', function() {
+		for (var i = 1000; i < 100000; i+= 100) {
+			expect(calc.sellerEarnsPercentage(i)).to.be.at.least(75);
+		}
+	});
+
+	it('seller percentage of earnings should increase (in general) with item price', function() {
+		let previousValue = -Infinity;
+		for (var i = 100; i < 2000; i+= 100) {
+			expect(calc.sellerEarnsPercentage(i)).to.be.at.least(previousValue);
+			previousValue = calc.sellerEarnsPercentage(i);
+		}
+		previousValue = -Infinity;
+		for (var i = 0; i <= 100000; i+= 2000) {
+			expect(calc.sellerEarnsPercentage(i)).to.be.at.least(previousValue);
+			previousValue = calc.sellerEarnsPercentage(i);
+		}
+	});
+
 	it('stripe fee should be less than seller fee', function() {
 		for (var i = 100; i <= 100000; i += 100) {
 			expect(calc.stripeFee(i)).to.be.below(calc.sellerFee(i));

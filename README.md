@@ -21,6 +21,9 @@ Returns amount to be paid to Collage by seller on transaction
 #### `sellerEarns(initialPrice)`
 Returns amount to be paid to seller on transaction
 
+#### `sellerEarnsPercentage(initialPrice)`
+Returns percentage of sale price paid to seller
+
 #### `sellerFeeRevenue(initialPrice)`
 What collage earns from seller on transaction. (`sellerFee - stripeFee`)
 
