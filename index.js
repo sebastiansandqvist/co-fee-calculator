@@ -37,11 +37,11 @@ module.exports = {
 
 	/**
 	 * Collage fees for sellers
-	 * @param  {Number} finalPrice in cents
+	 * @param  {Number} initialPrice in cents
 	 * @return {Number}            in cents
 	 */
-	sellerFee(finalPrice) {
-		return round(0.05 * finalPrice + 100, 0);
+	sellerFee(initialPrice) {
+		return round(0.05 * initialPrice + 100, 0);
 
 	},
 
