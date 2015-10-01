@@ -1,7 +1,7 @@
 # co-fee-calculator
 ## Collage Fee Calculations
 
-[![NPM version](https://img.shields.io/npm/v/co-fee-calculator.svg)](https://www.npmjs.com/package/co-fee-calculator) ![Dependencies](https://img.shields.io/david/sebastiansandqvist/co-fee-calculator.svg) [![build status](http://img.shields.io/travis/sebastiansandqvist/co-fee-calculator.svg)](https://travis-ci.org/sebastiansandqvist/co-fee-calculator) [![Test Coverage](https://codeclimate.com/github/sebastiansandqvist/co-fee-calculator/badges/coverage.svg)](https://codeclimate.com/github/sebastiansandqvist/co-fee-calculator/coverage)
+[![NPM version](https://img.shields.io/npm/v/@seabass/co-fee-calculator.svg)](https://www.npmjs.com/package/@seabass/co-fee-calculator) ![Dependencies](https://img.shields.io/david/sebastiansandqvist/co-fee-calculator.svg) [![build status](http://img.shields.io/travis/sebastiansandqvist/co-fee-calculator.svg)](https://travis-ci.org/sebastiansandqvist/co-fee-calculator) [![Test Coverage](https://codeclimate.com/github/sebastiansandqvist/co-fee-calculator/badges/coverage.svg)](https://codeclimate.com/github/sebastiansandqvist/co-fee-calculator/coverage)
 
 ## API
 *(All values are in cents)*
