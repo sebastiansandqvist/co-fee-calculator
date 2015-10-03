@@ -16,54 +16,21 @@ describe('Collage fee', function() {
 		}
 	});
 
-	it('margin should be between 5% and 10% for items above $10', function() {
+	it('margin should be between 10% and 30% for items over $10', function() {
 		for (var i = 1000; i <= 100000; i += 100) {
-			expect(calc.finalPriceMargin(i)).to.be.within(5, 10);
+			expect(calc.finalPriceMargin(i)).to.be.within(10, 30);
 		}
 	});
 
-	it('margin for low values $1: 100%, $2: 50%, $3: 33%, ...', function() {
-		for (var i = 1; i < 20; i++) {
-			let margin = calc.finalPriceMargin(i * 100);
-			let answer = 100 / i;
-			expect(margin).to.equal(Math.round(answer));
-		}
-	});
-
-	it('seller earnings for should be positive for items above $5', function() {
-		for (var i = 500; i <= 100000; i+= 100) {
-			expect(calc.sellerEarns(i)).to.be.above(0);
-		}
-	});
-
-	it('seller percentage of earnings should be above 75% for items above $10', function() {
-		for (var i = 1000; i < 100000; i+= 100) {
-			expect(calc.sellerEarnsPercentage(i)).to.be.at.least(75);
-		}
-	});
-
-	it('seller percentage of earnings should increase (in general) with item price', function() {
-		let previousValue = -Infinity;
-		for (var i = 100; i < 2000; i+= 100) {
-			expect(calc.sellerEarnsPercentage(i)).to.be.at.least(previousValue);
-			previousValue = calc.sellerEarnsPercentage(i);
-		}
-		previousValue = -Infinity;
-		for (var i = 0; i <= 100000; i+= 2000) {
-			expect(calc.sellerEarnsPercentage(i)).to.be.at.least(previousValue);
-			previousValue = calc.sellerEarnsPercentage(i);
-		}
-	});
-
-	it('stripe fee should be less than seller fee', function() {
+	it('stripe fee should be less than collage revenue', function() {
 		for (var i = 100; i <= 100000; i += 100) {
-			expect(calc.stripeFee(i)).to.be.below(calc.sellerFee(i));
+			expect(calc.stripeFee(i)).to.be.below(calc.collageRevenue(i));
 		}
 	});
 
-	it('seller fee should be about the same as buyer fee', function() {
+	it('revenue from margins should always be at least $2', function() {
 		for (var i = 0; i <= 100000; i += 100) {
-			expect(calc.sellerFee(i)).to.be.closeTo(calc.buyerFeeRevenue(i), 100); // +- $1
+			expect(calc.marginRevenue(i)).to.be.at.least(200);
 		}
 	});
 

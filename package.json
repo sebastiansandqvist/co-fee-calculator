@@ -1,6 +1,6 @@
 {
   "name": "@seabass/co-fee-calculator",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Calculates fee rates for Collage",
   "main": "index.js",
   "directories": {

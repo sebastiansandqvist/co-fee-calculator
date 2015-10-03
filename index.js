@@ -14,7 +14,7 @@ module.exports = {
 	 * @return {Number}              in cents
 	 */
 	finalPrice(initialPrice) {
-		return initialPrice + round.down(initialPrice * 0.05 + 100, -2);
+		return initialPrice + round.down(initialPrice * 0.1 + 200, -2);
 	},
 
 	/**
@@ -36,49 +36,11 @@ module.exports = {
 	},
 
 	/**
-	 * Collage fees for sellers
-	 * @param  {Number} initialPrice in cents
-	 * @return {Number}            in cents
-	 */
-	sellerFee(initialPrice) {
-		return round(0.05 * initialPrice + 100, 0);
-
-	},
-
-	/**
-	 * Collage seller earnings given initial price
-	 * @param  {Number} initialPrice in cents
-	 * @return {Number}              in cents
-	 */
-	sellerEarns(initialPrice) {
-		return initialPrice - this.sellerFee(initialPrice);
-	},
-
-	/**
-	 * Percent of final sale price that goes to the seller
-	 * @param  {Number} i initialPrice in cents
-	 * @return {Number}   %
-	 */
-	sellerEarnsPercentage(i) {
-		return round((i - this.sellerFee(i)) * 100 / this.finalPrice(i), 0);
-	},
-
-	/**
-	 * What Collage earns from seller fees (is kind to sellers by not basing on finalPrice)
-	 * @param  {Number} initialPrice in cents
-	 * @return {Number}              in cents
-	 */
-	sellerFeeRevenue(initialPrice) {
-		return this.sellerFee(initialPrice) - this.stripeFee(this.finalPrice(initialPrice));
-	},
-
-	/**
 	 * What Collage earns by increasing price to buyers
-	 * (Note: buyerFeeRevenue === buyerFee)
 	 * @param  {Number} initialPrice in cents
 	 * @return {Number}              in cents
 	 */
-	buyerFeeRevenue(initialPrice) {
+	marginRevenue(initialPrice) {
 		return this.finalPrice(initialPrice) - initialPrice;
 	},
 
@@ -88,7 +50,7 @@ module.exports = {
 	 * @return {Number}              in cents
 	 */
 	collageRevenue(initialPrice) {
-		return this.sellerFeeRevenue(initialPrice) + this.buyerFeeRevenue(initialPrice);
+		return this.marginRevenue(initialPrice) - this.stripeFee(this.finalPrice(initialPrice));
 	}
 
 };
