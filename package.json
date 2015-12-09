@@ -3,6 +3,7 @@
   "version": "1.2.0",
   "description": "Calculates fee rates for Collage",
   "main": "index.js",
+  "private": false,
   "directories": {
     "test": "test"
   },
