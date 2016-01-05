@@ -16,6 +16,12 @@ describe('Collage fee', function() {
 		}
 	});
 
+	it('initial price should be calculated from final price', function() {
+		for (var i = 0; i <= 100000; i += 100) {
+			expect(calc.initialPrice(calc.finalPrice(i))).to.equal(i);
+		}
+	});
+
 	it('margin should be between 10% and 30% for items over $10', function() {
 		for (var i = 1000; i <= 100000; i += 100) {
 			expect(calc.finalPriceMargin(i)).to.be.within(10, 30);

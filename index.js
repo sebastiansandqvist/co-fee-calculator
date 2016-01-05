@@ -1,5 +1,3 @@
-'use strict';
-
 const round = require('round-to');
 
 /*
@@ -15,6 +13,11 @@ module.exports = {
 	 */
 	finalPrice(initialPrice) {
 		return initialPrice + round.down(initialPrice * 0.1 + 200, -2);
+	},
+
+	// Inverse of above function
+	initialPrice(finalPrice) {
+		return round.up(10 * (finalPrice - 200) / 11, -2);
 	},
 
 	/**
