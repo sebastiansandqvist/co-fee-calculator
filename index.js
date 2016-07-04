@@ -1,4 +1,15 @@
-const round = require('round-to');
+// this simpler version should work, but isn't reliable due to v8 rounding bug
+// var round = function(modifier, number, place) {
+// 	var multiplier = Math.pow(10, place);
+// 	return Math[modifier](number * multiplier) / multiplier;
+// };
+
+var round = function(modifier, number, place) {
+	var exp = place > 0 ? 'e' : 'e-';
+	var expNeg = place > 0 ? 'e-' : 'e';
+	place = Math.abs(place);
+	return Number(Math[modifier](number + exp + place) + expNeg + place);
+}
 
 /*
 NOTE: All prices are in cents
@@ -11,13 +22,13 @@ module.exports = {
 	 * @param  {Number} initialPrice in cents
 	 * @return {Number}              in cents
 	 */
-	finalPrice(initialPrice) {
-		return initialPrice + round.down(initialPrice * 0.1 + 200, -2);
+	finalPrice: function(initialPrice) {
+		return initialPrice + round('floor', initialPrice * 0.1 + 200, -2);
 	},
 
 	// Inverse of above function
-	initialPrice(finalPrice) {
-		return round.up(10 * (finalPrice - 200) / 11, -2);
+	initialPrice: function(finalPrice) {
+		return round('ceil', 10 * (finalPrice - 200) / 11, -2);
 	},
 
 	/**
@@ -25,8 +36,8 @@ module.exports = {
 	 * @param  {Number} initialPrice in cents
 	 * @return {Number}              % change
 	 */
-	finalPriceMargin(initialPrice) {
-		return round((this.finalPrice(initialPrice) - initialPrice) * 100 / initialPrice, 0);
+	finalPriceMargin: function(initialPrice) {
+		return round('round', (this.finalPrice(initialPrice) - initialPrice) * 100 / initialPrice, 0);
 	},
 
 	/**
@@ -34,8 +45,8 @@ module.exports = {
 	 * @param  {Number} finalPrice in cents
 	 * @return {Number}            in cents
 	 */
-	stripeFee(finalPrice) {
-		return round(0.029 * finalPrice + 30, 0);
+	stripeFee: function(finalPrice) {
+		return round('round', 0.029 * finalPrice + 30, 0);
 	},
 
 	/**
@@ -43,7 +54,7 @@ module.exports = {
 	 * @param  {Number} initialPrice in cents
 	 * @return {Number}              in cents
 	 */
-	marginRevenue(initialPrice) {
+	marginRevenue: function(initialPrice) {
 		return this.finalPrice(initialPrice) - initialPrice;
 	},
 
@@ -52,7 +63,7 @@ module.exports = {
 	 * @param  {Number} initialPrice in cents
 	 * @return {Number}              in cents
 	 */
-	collageRevenue(initialPrice) {
+	collageRevenue: function(initialPrice) {
 		return this.marginRevenue(initialPrice) - this.stripeFee(this.finalPrice(initialPrice));
 	}
 
